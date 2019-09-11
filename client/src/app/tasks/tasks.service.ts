@@ -31,7 +31,7 @@ export class TasksService {
 
 	updateTask(task: Task): Observable<Task>{
 		return this.http
-		.put<Task>('api/task/${task._id}', task)
+		.put<Task>('api/task/${task.id}', task)
 		.pipe(catchError(this.handleError('updateTask', task)))
 	}
 }
