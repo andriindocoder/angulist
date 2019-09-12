@@ -16,6 +16,12 @@ export class TasksService {
 		this.handleError = httpErrorHandler.createHandleError('TasksService')
 	}
 
+	getTasks(): Observable<Task[]>{
+		return this.http
+		.get<Task[]>('api/tasks')
+		.pipe(catchError(this.handleError('getTasks', [])))
+	}
+
 	addTask(task: Task): Observable<Task>{
 		return this.http
 		.post<Task>('api/task', task)
@@ -31,7 +37,7 @@ export class TasksService {
 
 	updateTask(task: Task): Observable<Task>{
 		return this.http
-		.put<Task>('api/task/${task.id}', task)
+		.put<Task>(`api/task/${task.id}`, task)
 		.pipe(catchError(this.handleError('updateTask', task)))
 	}
 }
